@@ -11,15 +11,16 @@
     <packaging>jar</packaging>
     <groupId>org.webjars</groupId>
     <artifactId>lato</artifactId>
-    <version>0.3.1-SNAPSHOT</version>
+    <version>2.015-SNAPSHOT</version>
     <name>Lato</name>
     <description>WebJar for Lato</description>
     <url>http://webjars.org</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <upstream.version>0.3.0</upstream.version>
-        <upstream.url>https://github.com/mrkelly/lato/archive/v${upstream.version}.zip</upstream.url>
+        <upstream.version>3.0.0</upstream.version>
+        <upstream.url>https://github.com/betsol/lato-font/archive/v${upstream.version}.zip</upstream.url>
+        <upstream.artifactId>lato-font</upstream.artifactId>
         <destDir>${project.build.outputDirectory}/META-INF/resources/webjars/${project.artifactId}/${project.version}</destDir>
         <requirejs>
             {
@@ -35,6 +36,11 @@
             <id>nelsongraca</id>
             <name>Nelson Graça</name>
             <email />
+        </developer>
+        <developer>
+            <id>rmacd</id>
+            <name/>
+            <email>ronald@rmacd.com</email>
         </developer>
     </developers>
 
@@ -70,13 +76,13 @@
                         <goals><goal>run</goal></goals>
                         <configuration>
                             <target>
-                                <echo message="download archive" />
-                                <get src="${upstream.url}" dest="${project.build.directory}/${project.artifactId}.zip" />
-                                <echo message="unzip archive" />
-                                <unzip src="${project.build.directory}/${project.artifactId}.zip" dest="${project.build.directory}" />
-                                <echo message="moving resources" />
+                                <echo message="Downloading font archive from upstream" />
+                                <get src="${upstream.url}" dest="${project.build.directory}/${upstream.artifactId}.zip" />
+                                <echo message="Unzipping archive" />
+                                <unzip src="${project.build.directory}/${upstream.artifactId}.zip" dest="${project.build.directory}" />
+                                <echo message="Moving resources" />
                                 <move todir="${destDir}">
-                                    <fileset dir="${project.build.directory}/${project.artifactId}-${upstream.version}" />
+                                    <fileset dir="${project.build.directory}/${upstream.artifactId}-${upstream.version}" />
                                 </move>
                             </target>
                         </configuration>
